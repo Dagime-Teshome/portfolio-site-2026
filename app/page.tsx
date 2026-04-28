@@ -1,8 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
+import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 
 export default function Home() {
@@ -12,11 +11,9 @@ export default function Home() {
       <main>
         <Hero />
         <hr className="divider" />
-        <About />
+        <Experience />
         <hr className="divider" />
         <Projects />
-        <hr className="divider" />
-        <Experience />
         <hr className="divider" />
         <Contact />
       </main>
@@ -27,7 +24,9 @@ export default function Home() {
           fontFamily: "var(--font-mono)",
           fontSize: "clamp(.65rem, 1vw, .75rem)",
           color: "var(--muted)",
-          borderTop: "1px solid #00ff4120",
+          borderTop: "1px solid var(--border)",
+          position: "relative",
+          zIndex: 10,
         }}
       >
         <span style={{ color: "var(--accent2)" }}>$ </span>
