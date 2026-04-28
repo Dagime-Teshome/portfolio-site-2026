@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -33,17 +32,7 @@ export default function RootLayout({
       lang="en"
       className={`${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
     >
-      <body>
-        <Script id="theme-init" strategy="beforeInteractive">
-          {`
-            try {
-              const t = localStorage.getItem('theme') || 'dark';
-              document.documentElement.setAttribute('data-theme', t);
-            } catch(e) {}
-          `}
-        </Script>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
