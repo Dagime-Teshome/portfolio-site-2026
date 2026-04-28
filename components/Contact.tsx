@@ -2,22 +2,10 @@
 import { useEffect, useRef } from "react";
 
 const links = [
-  { label: "your@email.com", href: "mailto:your@email.com", cmd: "mailto" },
-  {
-    label: "GitHub",
-    href: "https://github.com/yourusername",
-    cmd: "open github",
-  },
-  {
-    label: "LinkedIn",
-    href: "https://linkedin.com/in/yourusername",
-    cmd: "open linkedin",
-  },
-  {
-    label: "Upwork",
-    href: "https://upwork.com/freelancers/yourusername",
-    cmd: "open upwork",
-  },
+  { label: "your@email.com", href: "mailto:your@email.com" },
+  { label: "GitHub", href: "https://github.com/yourusername" },
+  { label: "LinkedIn", href: "https://linkedin.com/in/yourusername" },
+  { label: "Upwork", href: "https://upwork.com/freelancers/yourusername" },
 ];
 
 export default function Contact() {
@@ -40,41 +28,25 @@ export default function Contact() {
     <section id="contact" ref={ref} className="fade-in">
       <p className="section-title">contact</p>
 
-      <div
+      <p
         style={{
-          background: "rgba(22,27,34,0.5)",
-          border: "1px solid #00ff4120",
-          borderRadius: "6px",
-          padding: "clamp(1rem, 2.5vw, 1.75rem)",
-          marginBottom: "1.75rem",
+          fontFamily: "'Space Grotesk', sans-serif",
+          color: "var(--muted)",
+          fontSize: "clamp(.85rem, 1.4vw, 1rem)",
+          maxWidth: 520,
+          marginBottom: "2rem",
+          lineHeight: 1.8,
         }}
       >
-        <p
-          style={{
-            color: "var(--muted)",
-            fontSize: "clamp(.72rem, 1.1vw, .82rem)",
-            marginBottom: ".75rem",
-          }}
-        >
-          <span style={{ color: "var(--accent2)" }}>$ </span>whoami --contact
-        </p>
-        <p
-          style={{
-            color: "var(--text)",
-            fontSize: "clamp(.78rem, 1.3vw, .95rem)",
-            lineHeight: 1.8,
-          }}
-        >
-          Currently open to backend roles and freelance Go / AI integration
-          projects. I reply within 24 hours.
-        </p>
-      </div>
+        Currently open to backend roles and freelance Go / AI integration
+        projects. I reply within 24 hours.
+      </p>
 
       <div
         style={{
           display: "flex",
           flexDirection: "column",
-          gap: "clamp(.4rem, 1vw, .6rem)",
+          gap: "clamp(.3rem,.8vw,.5rem)",
         }}
       >
         {links.map((l) => (
@@ -84,15 +56,16 @@ export default function Contact() {
             target={l.href.startsWith("http") ? "_blank" : undefined}
             rel="noopener noreferrer"
             style={{
-              display: "flex",
+              display: "inline-flex",
               alignItems: "center",
-              gap: ".6rem",
-              fontFamily: "var(--font-mono)",
-              fontSize: "clamp(.75rem, 1.2vw, .9rem)",
+              gap: ".5rem",
+              fontFamily: "'Space Grotesk', sans-serif",
+              fontSize: "clamp(.8rem, 1.3vw, .95rem)",
               color: "var(--muted)",
               textDecoration: "none",
               transition: "color .2s",
-              padding: "clamp(.3rem,.8vw,.45rem) 0",
+              width: "fit-content",
+              padding: "clamp(.25rem,.6vw,.35rem) 0",
             }}
             onMouseEnter={(e) =>
               (e.currentTarget.style.color = "var(--accent)")
@@ -101,14 +74,15 @@ export default function Contact() {
           >
             <span
               style={{
-                color: "var(--accent2)",
-                minWidth: "clamp(90px,12vw,130px)",
-                fontSize: "clamp(.68rem,1vw,.78rem)",
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: "clamp(.6rem,.9vw,.7rem)",
+                color: "var(--border)",
+                letterSpacing: ".04em",
               }}
             >
-              $ {l.cmd}
+              →
             </span>
-            <span style={{ color: "inherit" }}>→ {l.label}</span>
+            {l.label}
           </a>
         ))}
       </div>
