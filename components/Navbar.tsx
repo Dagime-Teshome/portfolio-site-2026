@@ -1,30 +1,31 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
-const links = ["about", "projects", "experience", "contact"];
+const links = ["experience", "projects", "contact"];
 
 export default function Navbar() {
-  const [mounted, setMounted] = useState(true);
-  const isDarkRef = useRef(true);
+  const [mounted, setMounted] = useState(false);
+  const [isDark, setIsDark] = useState(true);
 
   useEffect(() => {
-    isDarkRef.current =
-      document.documentElement.getAttribute("data-theme") !== "light";
-  }, []);
+    const saved = localStorage.getItem("theme");
+    const dark = saved !== "light";
+    if (!dark) document.documentElement.setAttribute("data-theme", "light");
+    setIsDark(dark);
+    setMounted(true);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const toggleTheme = () => {
-    const next = !isDarkRef.current;
-    isDarkRef.current = next;
-    const theme = next ? "dark" : "light";
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
-    // Force re-render so emoji updates
-    setMounted((m) => !m || true);
+    const next = !isDark;
+    setIsDark(next);
+    if (next) {
+      document.documentElement.removeAttribute("data-theme");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+    localStorage.setItem("theme", next ? "dark" : "light");
   };
-
-  const isDark = mounted
-    ? document.documentElement.getAttribute("data-theme") !== "light"
-    : true;
 
   const scrollTo = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -47,7 +48,6 @@ export default function Navbar() {
         transition: "background .3s",
       }}
     >
-      {/* Logo */}
       <span
         style={{
           fontFamily: "var(--font-mono)",
@@ -115,7 +115,6 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* Theme toggle */}
         {mounted && (
           <button
             onClick={toggleTheme}
